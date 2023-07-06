@@ -6,9 +6,7 @@ import Logo from "./Logo";
 import Searchbar from "./Searchbar";
 import Usermenu from "./Usermenu";
 
-type Props = {};
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
   return (
     <header className="w-full fixed bg-white shadow-sm z-10">
       <div className="py-4 border-b-[1px]">
