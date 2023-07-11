@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { GrLanguage } from "react-icons/gr";
-import loginModalHook from "../hooks/loginModelHook";
+import loginModalHook from "../hooks/signInModelHook";
 import UserProfile from "../UserProfile";
 import MenuItem from "./MenuItem";
 
@@ -56,7 +56,7 @@ const Usermenu = () => {
             <div className="absolute rounded-xl shadow-md bg-white overflow-hidden text-sm w-[40vw] md:w-3/4 right-0 top-12">
               <div className="cursor-pointer">
                 <MenuItem onClick={loginModal.onOpen} itemLabel="Sign up" />
-                <MenuItem onClick={loginModal.onOpen} itemLabel="Log in" />
+                <MenuItem onClick={() => {}} itemLabel="Log in" />
               </div>
             </div>
           )}

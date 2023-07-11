@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Nunito } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
-import LoginModal from "./components/authModals/LoginModal";
+import LoginModal from "./components/authModals/SignInModal";
 
 const nunito = Nunito({ subsets: ["latin"] });
 

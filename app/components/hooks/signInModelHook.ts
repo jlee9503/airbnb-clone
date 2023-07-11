@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
-interface LoginModal {
+interface SignInModal {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-const loginModalHook = create<LoginModal>((set) => ({
+const signInModalHook = create<SignInModal>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default loginModalHook;
+export default signInModalHook;
