@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import signInModalHook from "../hooks/signInModelHook";
+import signInModalHook from "../../hooks/signInModelHook";
 import Heading from "../Heading";
 import Modal from "./Modal";
 import Input from "../inputs/InputField";
 import Button from "../Button";
 import { AiFillGithub } from "react-icons/ai";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const SignInModal = () => {
   const signInModal = signInModalHook();
@@ -28,6 +30,18 @@ const SignInModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
+
+    axios
+      .post("/api/register", data)
+      .then(() => {
+        signInModal.onClose();
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const bodyContent = (

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { GrLanguage } from "react-icons/gr";
-import loginModalHook from "../hooks/signInModelHook";
+import loginModalHook from "../../hooks/signInModelHook";
 import UserProfile from "../UserProfile";
 import MenuItem from "./MenuItem";
 
