@@ -3,14 +3,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { GrLanguage } from "react-icons/gr";
-import loginModalHook from "../../hooks/signInModelHook";
+import signinModalHook from "../../hooks/signInModelHook";
+import LogInModalHook from "@/app/hooks/loginInModelHook";
 import UserProfile from "../UserProfile";
 import MenuItem from "./MenuItem";
 
 const Usermenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const loginModal = loginModalHook();
+
+  const signinModal = signinModalHook();
+  const loginModal = LogInModalHook();
 
   function handleClickOutside(event: MouseEvent) {
     if (menuRef.current && !menuRef.current.contains(event.target as Element)) {
@@ -55,8 +58,8 @@ const Usermenu = () => {
           {isOpen && (
             <div className="absolute rounded-xl shadow-md bg-white overflow-hidden text-sm w-[40vw] md:w-3/4 right-0 top-12">
               <div className="cursor-pointer">
-                <MenuItem onClick={loginModal.onOpen} itemLabel="Sign up" />
-                <MenuItem onClick={() => {}} itemLabel="Log in" />
+                <MenuItem onClick={signinModal.onOpen} itemLabel="Sign up" />
+                <MenuItem onClick={loginModal.onOpen} itemLabel="Log in" />
               </div>
             </div>
           )}
