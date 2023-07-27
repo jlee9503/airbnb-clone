@@ -1,6 +1,6 @@
 "use client";
 
-import { User } from "@prisma/client";
+import { LoginUser } from "@/app/types";
 import React from "react";
 import Container from "../Container";
 import Logo from "./Logo";
@@ -8,10 +8,10 @@ import Searchbar from "./Searchbar";
 import Usermenu from "./Usermenu";
 
 interface NavBarProp {
-  currentUser?: User | null 
+  currentUser?: LoginUser | null 
 }
 
-const Navbar = ({currentUser}: NavBarProp) => {
+const Navbar = ({ currentUser }: NavBarProp) => {
   return (
     <header className="w-full fixed bg-white shadow-sm z-10">
       <div className="py-4 border-b-[1px]">
@@ -19,7 +19,7 @@ const Navbar = ({currentUser}: NavBarProp) => {
           <div className="flex justify-between items-center gap-3 md:gap-0">
             <Logo />
             <Searchbar />
-            <Usermenu />
+            <Usermenu currentUser={currentUser} />
           </div>
         </Container>
       </div>

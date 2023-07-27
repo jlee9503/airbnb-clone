@@ -11,6 +11,7 @@ import Button from "../Button";
 import { AiFillGithub } from "react-icons/ai";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 const SignInModal = () => {
   const signInModal = signInModalHook();
@@ -82,13 +83,13 @@ const SignInModal = () => {
         label="Continue with Google"
         icon={FcGoogle}
         outline
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <Button
         label="Continue with Github"
         icon={AiFillGithub}
         outline
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
 
       <div className="text-neutral-500 mt-4 font-light flex justify-center items-center gap-2">

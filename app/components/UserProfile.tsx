@@ -2,11 +2,15 @@
 
 import Image from "next/image";
 
-const UserProfile = () => {
+interface UserProfileProps {
+  imgSrc: string | null | undefined;
+}
+
+const UserProfile = ({ imgSrc }: UserProfileProps) => {
   return (
     <Image
       alt="avatar"
-      src="/images/avatar.jpg"
+      src={imgSrc || `/images/avatar.jpg`}
       className="rounded-full"
       width={30}
       height={30}
