@@ -3,6 +3,7 @@
 import { LoginUser } from "@/app/types";
 import React from "react";
 import Container from "../Container";
+import Categories from "./Categories";
 import Logo from "./Logo";
 import Searchbar from "./Searchbar";
 import Usermenu from "./Usermenu";
@@ -23,6 +24,8 @@ const Navbar = ({ currentUser }: NavBarProp) => {
           </div>
         </Container>
       </div>
+
+      <Categories />
     </header>
   );
 };

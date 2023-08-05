@@ -8,7 +8,14 @@ const Logo = () => {
   const router = useRouter();
 
   return (
-    <Image alt="logo" height={100} width={100} src="/images/airbnb-logo.png" className="cursor-pointer" />
+    <Image
+      alt="logo"
+      height={100}
+      width={100}
+      src="/images/airbnb-logo.png"
+      className="cursor-pointer"
+      onClick={() => router.push("/")}
+    />
   );
 };
 
