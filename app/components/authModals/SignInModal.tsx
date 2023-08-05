@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import signInModalHook from "../../hooks/signInModelHook";
@@ -12,9 +12,12 @@ import { AiFillGithub } from "react-icons/ai";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import LogInModalHook from "@/app/hooks/loginInModelHook";
 
 const SignInModal = () => {
   const signInModal = signInModalHook();
+  const loginModal = LogInModalHook();
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -44,6 +47,11 @@ const SignInModal = () => {
         setIsLoading(false);
       });
   };
+
+  const toggleModal = useCallback(() => {
+    signInModal.onClose();
+    loginModal.onOpen();
+  }, [signInModal, loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -96,7 +104,7 @@ const SignInModal = () => {
         <div>Already have an account?</div>
         <div
           className="cursor-pointer text-neutral-800 hover:underline"
-          onClick={signInModal.onClose}
+          onClick={toggleModal}
         >
           Log in
         </div>
