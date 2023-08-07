@@ -5,6 +5,7 @@ import SignInModal from "./components/authModals/SignInModal";
 import ToastProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/authModals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
+import HostModal from "./components/authModals/HostModal";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  }) {
+}) {
   const currentUser = await getCurrentUser();
 
   return (
@@ -26,6 +27,7 @@ export default async function RootLayout({
         <ToastProvider />
         <LoginModal />
         <SignInModal />
+        <HostModal />
         <Navbar currentUser={currentUser} />
         {children}
       </body>

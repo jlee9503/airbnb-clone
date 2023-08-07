@@ -13,8 +13,8 @@ interface ModalProps {
   isOpen?: boolean;
   onClose: () => void;
   onSubmit: () => void;
-  socialLoginAction?: () => void;
-  socialLoginLabel?: string;
+  secondaryAction?: () => void;
+  secondaryActionLabel?: string;
 }
 
 const Modal = ({
@@ -26,8 +26,8 @@ const Modal = ({
   isOpen,
   onClose,
   onSubmit,
-  socialLoginAction,
-  socialLoginLabel,
+  secondaryAction: secondaryAction,
+  secondaryActionLabel: secondaryActionLabel,
 }: ModalProps) => {
   const [openModal, setOpenModal] = useState(isOpen);
 
@@ -53,11 +53,11 @@ const Modal = ({
   }, [disabled, onSubmit]);
 
   const handleSecondaryAction = useCallback(() => {
-    if (disabled || !socialLoginAction) {
+    if (disabled || !secondaryAction) {
       return;
     }
-    socialLoginAction();
-  }, [disabled, socialLoginAction]);
+    secondaryAction();
+  }, [disabled, secondaryAction]);
 
   if (!isOpen) {
     return null;
@@ -88,8 +88,8 @@ const Modal = ({
               <div className="flex flex-col gap-2 p-6">
                 <div className="flex flex-row items-center gap-4 w-full">
                   <Button label={actionLabel} disabled={disabled} onClick={handleSubmit} />
-                  {socialLoginAction && socialLoginLabel && (
-                    <Button label={socialLoginLabel} disabled={disabled} onClick={handleSecondaryAction} outline />
+                  {secondaryAction && secondaryActionLabel && (
+                    <Button label={secondaryActionLabel} disabled={disabled} onClick={handleSecondaryAction} outline />
                   )}
                 </div>
                 

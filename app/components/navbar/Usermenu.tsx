@@ -9,6 +9,7 @@ import UserProfile from "../UserProfile";
 import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import { LoginUser } from "@/app/types";
+import HostModalHook from "@/app/hooks/hostModalHook";
 
 interface UsermenuProps {
   currentUser?: LoginUser | null;
@@ -20,6 +21,7 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
 
   const signinModal = signinModalHook();
   const loginModal = LogInModalHook();
+  const hostModal = HostModalHook();
 
   function handleClickOutside(event: MouseEvent) {
     if (menuRef.current && !menuRef.current.contains(event.target as Element)) {
@@ -37,12 +39,21 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
     setIsOpen((val) => !val);
   }, []);
 
+  const hostAirbnb = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    // Open host page
+    hostModal.onOpen();
+  }, [currentUser, loginModal, hostModal]);
+
   return (
     <div className="relative">
       <div className="flex items-center gap-3">
         <div
           className="hidden md:block text-sm font-semibold px-4 py-3 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-          onClick={() => {}}
+          onClick={hostAirbnb}
         >
           Airbnb your home
         </div>
@@ -70,7 +81,7 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
                     <MenuItem onClick={() => {}} itemLabel="My favorites" />
                     <MenuItem onClick={() => {}} itemLabel="My reservations" />
                     <MenuItem onClick={() => {}} itemLabel="My properties" />
-                    <MenuItem onClick={() => {}} itemLabel="Airbnb my home" />
+                    <MenuItem onClick={hostAirbnb} itemLabel="Airbnb my home" />
                     <hr />
                     <MenuItem onClick={() => signOut()} itemLabel="Logout" />
                   </>
