@@ -1,10 +1,12 @@
 "use client";
 
 import HostModalHook from "@/app/hooks/hostModalHook";
+import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import Heading from "../Heading";
 import CategoryInput from "../inputs/CategoryInput";
+import Location from "../inputs/Location";
 import { categories } from "../navbar/Categories";
 import Modal from "./Modal";
 
@@ -42,6 +44,13 @@ const LogInModal = () => {
     },
   });
   const category = watch("category");
+  const location = watch("location");
+
+  const Map = useMemo(
+    () => dynamic(() => import("../Map"), { ssr: false }),
+    [location]
+  );
+
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldDirty: true,
@@ -54,7 +63,7 @@ const LogInModal = () => {
     setStep((val) => val - 1);
   };
 
-  const goNest = () => {
+  const goNext = () => {
     setStep((val) => val + 1);
   };
 
@@ -87,7 +96,9 @@ const LogInModal = () => {
               label={item.label}
               selected={category === item.label}
               icon={item.icon}
-              onClick={(category) => {setCustomValue('category', category)}}
+              onClick={(category) => {
+                setCustomValue("category", category);
+              }}
             />
           </div>
         ))}
@@ -95,13 +106,31 @@ const LogInModal = () => {
     </div>
   );
 
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your place located?"
+          subtitle="Help user find you"
+        />
+        <Location
+          onChange={(val) => {
+            setCustomValue("location", val);
+          }}
+          value={location}
+        />
+        <Map position={location?.latlng} />
+      </div>
+    );
+  }
+
   return (
     <Modal
       title="Airbnb your home"
       actionLabel={actionLabel}
       isOpen={hostModal.isOpen}
       onClose={hostModal.onClose}
-      onSubmit={() => {}}
+      onSubmit={goNext}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : goBack}
       body={bodyContent}
