@@ -1,12 +1,18 @@
 "use client";
 
 import HostModalHook from "@/app/hooks/hostModalHook";
+import { data } from "autoprefixer";
+import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import Heading from "../Heading";
 import CategoryInput from "../inputs/CategoryInput";
 import Counter from "../inputs/Counter";
+import ImageUpload from "../inputs/ImageUpload";
+import InputField from "../inputs/InputField";
 import Location from "../inputs/Location";
 import { categories } from "../navbar/Categories";
 import Modal from "./Modal";
@@ -24,6 +30,9 @@ const LogInModal = () => {
   const hostModal = HostModalHook();
 
   const [step, setStep] = useState(STEPS.CATEGORY);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const {
     register,
@@ -31,6 +40,7 @@ const LogInModal = () => {
     setValue,
     watch,
     formState: { errors },
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
       category: "",
@@ -49,6 +59,7 @@ const LogInModal = () => {
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
+  const imgSrc = watch("imgSrc");
 
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
@@ -61,6 +72,34 @@ const LogInModal = () => {
       shouldTouch: true,
       shouldValidate: true,
     });
+  };
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step != STEPS.PRICE) {
+      return goNext();
+    }
+
+    setIsLoading(true);
+
+    axios
+      .post("api/listings", data)
+      .then(() => {
+        toast.success("Your home has been added!");
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        hostModal.onClose();
+      })
+      .catch(() => {
+        toast.error(
+          "Error ocurred!" +
+            "\n" +
+            "Please check your information again."
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const goBack = () => {
@@ -161,16 +200,81 @@ const LogInModal = () => {
     );
   }
 
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your place"
+          subtitle="Show guests what your place look like"
+        />
+        <ImageUpload
+          value={imgSrc}
+          onChange={(val) => setCustomValue("imgSrc", val)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="How would you describe your place?"
+          subtitle="Please tell about your place"
+        />
+        <InputField
+          id="title"
+          label="Title"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <hr />
+        <InputField
+          id="description"
+          label="Description"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Lastly, set your price"
+          subtitle="How much do you charge per night?"
+        />
+        <InputField
+          id="price"
+          label="Price"
+          type="number"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          formatPrice
+          required
+        />
+      </div>
+    );
+  }
+
   return (
     <Modal
       title="Airbnb your home"
       actionLabel={actionLabel}
       isOpen={hostModal.isOpen}
       onClose={hostModal.onClose}
-      onSubmit={goNext}
+      onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : goBack}
       body={bodyContent}
+      disabled={isLoading}
     />
   );
 };
