@@ -8,6 +8,7 @@ import React, { useCallback, useMemo } from "react";
 import { format } from "date-fns";
 import Image from "next/image";
 import FavoriteButton from "../FavoriteButton";
+import Button from "../Button";
 
 interface PropertyCardProps {
   data: Listing;
@@ -66,7 +67,7 @@ const PropertyCard = ({
 
   return (
     <div
-      className="cursor-pointer col-span-1"
+      className="cursor-pointer col-span-1 group"
       onClick={() => router.push(`/listings/${data.id}`)}
     >
       <div className="w-full aspect-square relative overflow-hidden rounded-xl">
@@ -95,7 +96,14 @@ const PropertyCard = ({
         {!reservation && <div className="font-light">night</div>}
       </div>
 
-      
+      {onAction && actionLabel && (
+        <Button
+          disabled={disabled}
+          small
+          label={actionLabel}
+          onClick={handleCancel}
+        />
+      )}
     </div>
   );
 };

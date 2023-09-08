@@ -3,8 +3,8 @@
 import { useCallback, useState } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import signInModalHook from "@/app/hooks/signInModelHook";
-import LogInModalHook from "@/app/hooks/loginInModelHook";
+import signInModalHook from "@/app/hooks/signInModalHook";
+import LogInModalHook from "@/app/hooks/loginInModalHook";
 import Heading from "../Heading";
 import Modal from "./Modal";
 import Input from "../inputs/InputField";

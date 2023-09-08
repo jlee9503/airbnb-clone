@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { GrLanguage } from "react-icons/gr";
-import signinModalHook from "../../hooks/signInModelHook";
-import LogInModalHook from "@/app/hooks/loginInModelHook";
+import signinModalHook from "../../hooks/signInModalHook";
+import LogInModalHook from "@/app/hooks/loginInModalHook";
 import UserProfile from "../UserProfile";
 import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
