@@ -62,9 +62,7 @@ const PropertyInfo = ({
 
       <hr />
 
-      <div className="w-1/2">
-        <Map position={coordinates} />
-      </div>
+      <Map position={coordinates} />
     </div>
   );
 };
