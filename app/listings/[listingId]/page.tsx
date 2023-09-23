@@ -1,5 +1,6 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import getPropertyById from "@/app/actions/getPropertyById";
+import getReservations from "@/app/actions/getReservations";
 import EmptyState from "@/app/components/EmptyState";
 import PropertyClient from "./PropertyPage";
 
@@ -9,6 +10,7 @@ interface IParams {
 const PropertyPage = async ({ params }: { params: IParams }) => {
   const property = await getPropertyById(params);
   const currentUser = await getCurrentUser();
+  const reservations = await getReservations(params);
 
   if (!property) {
     return (
@@ -16,7 +18,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
     )
   }
   return (
-    <PropertyClient property={property} currentUser={currentUser} />
+    <PropertyClient property={property} currentUser={currentUser} reservation={reservations} />
   )
 }
 

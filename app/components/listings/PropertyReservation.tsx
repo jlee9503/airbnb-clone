@@ -46,7 +46,10 @@ const PropertyReservation = ({
 
       <hr />
 
-      
+      <div className="flex flex-row justify-between items-center p-4 font-semibold text-lg">
+        <div>Total</div>
+        <div>$ {totalPrice}</div>
+      </div>
     </div>
   );
 };

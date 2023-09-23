@@ -52,7 +52,7 @@ const PropertyClient = ({
     return dates;
   }, [reservation]);
 
-  const oncreateReservation = useCallback(() => {
+  const onCreateReservation = useCallback(() => {
     if (!currentUser) {
       return loginModal.onOpen();
     }
@@ -70,10 +70,13 @@ const PropertyClient = ({
         toast.success("Property reserved!");
         setDateRange(initialDateRange);
 
-        router.push("/");
+        router.refresh();
       })
       .catch((error: any) => {
         toast.error("Error on your reservation");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [totalPrice, dateRange, property?.id, router, currentUser, loginModal]);
 
@@ -126,7 +129,7 @@ const PropertyClient = ({
                 dateRange={dateRange}
                 totalPrice={totalPrice}
                 onChangeDate={(val) => setDateRange(val)}
-                onSubmit={() => {}}
+                onSubmit={() => onCreateReservation()}
                 disabled={isloading}
                 disabledDates={disableDates}
               />
