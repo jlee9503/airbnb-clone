@@ -70,7 +70,7 @@ const PropertyClient = ({
         toast.success("Property reserved!");
         setDateRange(initialDateRange);
 
-        router.refresh();
+        router.push("/trips");
       })
       .catch((error: any) => {
         toast.error("Error on your reservation");

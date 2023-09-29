@@ -10,6 +10,7 @@ import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import { LoginUser } from "@/app/types";
 import HostModalHook from "@/app/hooks/hostModalHook";
+import { useRouter } from "next/navigation";
 
 interface UsermenuProps {
   currentUser?: LoginUser | null;
@@ -22,6 +23,8 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
   const signinModal = signinModalHook();
   const loginModal = LogInModalHook();
   const hostModal = HostModalHook();
+
+  const router = useRouter();
 
   function handleClickOutside(event: MouseEvent) {
     if (menuRef.current && !menuRef.current.contains(event.target as Element)) {
@@ -77,7 +80,7 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
               <div className="cursor-pointer">
                 {currentUser ? (
                   <>
-                    <MenuItem onClick={() => {}} itemLabel="My trips" />
+                    <MenuItem onClick={() => router.push('/trips')} itemLabel="My trips" />
                     <MenuItem onClick={() => {}} itemLabel="My favorites" />
                     <MenuItem onClick={() => {}} itemLabel="My reservations" />
                     <MenuItem onClick={() => {}} itemLabel="My properties" />
