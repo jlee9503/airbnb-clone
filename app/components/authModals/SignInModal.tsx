@@ -38,7 +38,9 @@ const SignInModal = () => {
     axios
       .post("/api/register", data)
       .then(() => {
+        toast.success("Please Login with your username and password");
         signInModal.onClose();
+        loginModal.onOpen();
       })
       .catch((err) => {
         toast.error("Something went wrong");

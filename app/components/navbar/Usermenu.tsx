@@ -80,9 +80,15 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
               <div className="cursor-pointer">
                 {currentUser ? (
                   <>
-                    <MenuItem onClick={() => router.push('/trips')} itemLabel="My trips" />
+                    <MenuItem
+                      onClick={() => router.push("/trips")}
+                      itemLabel="My trips"
+                    />
                     <MenuItem onClick={() => {}} itemLabel="My favorites" />
-                    <MenuItem onClick={() => {}} itemLabel="My reservations" />
+                    <MenuItem
+                      onClick={() => router.push("/reservations")}
+                      itemLabel="My reservations"
+                    />
                     <MenuItem onClick={() => {}} itemLabel="My properties" />
                     <MenuItem onClick={hostAirbnb} itemLabel="Airbnb my home" />
                     <hr />
