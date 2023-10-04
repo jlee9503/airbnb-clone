@@ -84,12 +84,18 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
                       onClick={() => router.push("/trips")}
                       itemLabel="My trips"
                     />
-                    <MenuItem onClick={() => router.push('/favorites')} itemLabel="My favorites" />
+                    <MenuItem
+                      onClick={() => router.push("/favorites")}
+                      itemLabel="My favorites"
+                    />
                     <MenuItem
                       onClick={() => router.push("/reservations")}
                       itemLabel="My reservations"
                     />
-                    <MenuItem onClick={() => {}} itemLabel="My properties" />
+                    <MenuItem
+                      onClick={() => router.push("/properties")}
+                      itemLabel="My properties"
+                    />
                     <MenuItem onClick={hostAirbnb} itemLabel="Airbnb my home" />
                     <hr />
                     <MenuItem onClick={() => signOut()} itemLabel="Logout" />

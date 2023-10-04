@@ -11,7 +11,7 @@ import FavoriteButton from "../FavoriteButton";
 import Button from "../Button";
 
 interface PropertyCardProps {
-  data: SafeListing;
+  data: Listing;
   reservation?: SafeReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
