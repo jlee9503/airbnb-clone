@@ -10,8 +10,6 @@ import { Range } from "react-date-range";
 import Heading from "../Heading";
 import Location, { LocationData } from "../inputs/Location";
 import Modal from "./Modal";
-import Map from "../Map";
-import { ST } from "next/dist/shared/lib/utils";
 import Calendar from "../inputs/Calendar";
 import Conuter from "../inputs/Counter";
 

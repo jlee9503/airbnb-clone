@@ -1,6 +1,5 @@
 'use client'
 
-import { Listing } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
@@ -11,7 +10,7 @@ import PropertyCard from "../components/listings/PropertyCard";
 import { LoginUser, SafeListing } from "../types"
 
 interface PropertiesClientProps {
-  properties: Listing[];
+  properties: SafeListing[];
   currentUser?: LoginUser | null;
 }
 
