@@ -2,7 +2,6 @@
 
 import locationHook from "@/app/hooks/locationHook";
 import { LoginUser, SafeListing, SafeReservation } from "@/app/types";
-import { Listing, Reservation } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
 import { format } from "date-fns";
@@ -11,7 +10,7 @@ import FavoriteButton from "../FavoriteButton";
 import Button from "../Button";
 
 interface PropertyCardProps {
-  data: Listing;
+  data: SafeListing;
   reservation?: SafeReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
