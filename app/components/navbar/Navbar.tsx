@@ -17,7 +17,7 @@ const Navbar = ({ currentUser }: NavBarProp) => {
     <header className="w-full fixed bg-white shadow-sm z-10">
       <div className="py-4 border-b-[1px]">
         <Container>
-          <div className="flex justify-between items-center gap-3 md:gap-0">
+          <div className="flex justify-between items-center gap-3 md:gap-0 max-h-16">
             <Logo />
             <Searchbar />
             <Usermenu currentUser={currentUser} />

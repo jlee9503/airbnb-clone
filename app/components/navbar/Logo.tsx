@@ -10,9 +10,9 @@ const Logo = () => {
   return (
     <Image
       alt="logo"
-      height={100}
+      height={50}
       width={100}
-      src="/images/airbnb-logo.png"
+      src="/images/rent.png"
       className="cursor-pointer"
       onClick={() => router.push("/")}
     />
