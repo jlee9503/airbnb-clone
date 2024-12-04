@@ -58,7 +58,7 @@ const Usermenu = ({ currentUser }: UsermenuProps) => {
           className="hidden md:block text-sm font-semibold px-4 py-3 rounded-full hover:bg-neutral-100 transition cursor-pointer"
           onClick={hostAirbnb}
         >
-          Airbnb your home
+          List your propery
         </div>
 
         <div className="pr-2 lg:block hidden cursor-pointer">
